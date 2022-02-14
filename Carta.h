@@ -1,14 +1,16 @@
 #ifndef INC_20212_TEAM_7_CARTA_H
 #define INC_20212_TEAM_7_CARTA_H
 
+#include <string>
+
 class Carta {
 private:
-    int _color;
+    std::string _color;
     int _number;
 
 public:
-    Carta(int color, int number);
-    int get_color() const;
+    Carta(std::string color, int number);
+    std::string get_color() const;
     int get_number() const;
 };
 

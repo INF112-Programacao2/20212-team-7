@@ -6,11 +6,13 @@
 #include "Carta.h"
 
 class Deck {
-private:
-    std::vector<Carta> deck;
 public:
     void fill_deck();
+    void shuffle_deck();
     void print_deck();
+    unsigned long get_deck_size() const;
+
+    std::vector<Carta> deck;
 };
 
 #endif
