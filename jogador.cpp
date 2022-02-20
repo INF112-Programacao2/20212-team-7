@@ -13,21 +13,35 @@ void Jogador::draw_card(std::vector<Carta> &deck, int quantidade) {
 }
 
 void Jogador::print_cartas() {
-    std::for_each(cartas.begin(), cartas.end(), [](const Carta& n) { std::cout << n.get_number() << ' ' << n.get_color() << ' ';});
-    std::cout << std::endl;
+    std::cout << "Suas cartas:" << std::endl;
+
+    std::for_each(cartas.begin(), cartas.end(), [](const Carta& n) { std::cout << n.get_numero() << ' ' << n.get_cor() << " | ";});
+    std::cout << std::endl << std::endl;
 }
 
+/*
+ * Verifica se a carta escolhida pelo jogador com índice começando pelo 1 é da mesma cor ou mesmo número.
+ * Caso seja, retira a carta do vetor com as cartas do jogador e joga na pilha de cartas.
+ */
 void Jogador::play_card(std::vector<Carta> &cartas_jogador, std::vector<Carta> &pilha_cartas, int index) {
+    bool carta_valida = false;
     index--;
 
-    if (cartas_jogador[index].get_color() == pilha_cartas.back().get_color() or
-        cartas_jogador[index].get_number() == pilha_cartas.back().get_number()) {
+    while (!carta_valida) {
+        if (cartas_jogador[index].get_cor() == pilha_cartas.back().get_cor() or
+            cartas_jogador[index].get_numero() == pilha_cartas.back().get_numero()) {
 
-        pilha_cartas.push_back(cartas_jogador[index]);
-        cartas_jogador.erase(cartas_jogador.begin() + index);
+            pilha_cartas.push_back(cartas_jogador[index]);
+            cartas_jogador.erase(cartas_jogador.begin() + index);
 
-    } else {
-        std::cout << "Carta não é válida para jogar" << std::endl;
+            carta_valida = true;
+        } else {
+            std::cout << cartas_jogador[index].get_numero() << ' ' << cartas_jogador[index].get_cor() << " não é uma carta válida para jogar." << std::endl << std::endl;
+
+            std::cout << "Selecione outra carta ou compre uma carta do deck." << std::endl;
+            std::cin >> index;
+            index--;
+        }
     }
 }
 

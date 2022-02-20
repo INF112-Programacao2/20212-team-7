@@ -8,11 +8,11 @@ Carta::Carta(std::string color, int number) {
     _number = number;
 }
 
-std::string Carta::get_color() const {
+std::string Carta::get_cor() const {
     return this->_color;
 }
 
-int Carta::get_number() const {
+int Carta::get_numero() const {
     return this->_number;
 }
 

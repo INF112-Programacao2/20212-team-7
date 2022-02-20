@@ -10,8 +10,8 @@ private:
 
 public:
     Carta(std::string color, int number);
-    std::string get_color() const;
-    int get_number() const;
+    std::string get_cor() const;
+    int get_numero() const;
 };
 
 #endif

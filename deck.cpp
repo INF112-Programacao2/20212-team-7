@@ -15,7 +15,7 @@ void Deck::fill_deck() {
 }
 
 void Deck::print_deck() {
-    std::for_each(deck.begin(), deck.end(), [](const Carta& n) { std::cout << n.get_number() << ' ' << n.get_color() << ' ';});
+    std::for_each(deck.begin(), deck.end(), [](const Carta& n) { std::cout << n.get_numero() << ' ' << n.get_cor() << ' ';});
 }
 
 void Deck::shuffle_deck() {

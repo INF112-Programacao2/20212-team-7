@@ -1,33 +1,22 @@
 #include <iostream>
 
-#include "Deck.h"
 #include "Jogo.h"
-#include "Jogador.h"
 
 using namespace std;
 
 int main() {
-    Jogo jogo = Jogo();
+    int qtd_jogadores = 1;
 
-    Deck deck = Deck();
-    deck.fill_deck();
-    deck.shuffle_deck();
+    cout << "Quanto jogadores vão participar da partida? (2-4)" << endl;
 
-    deck.print_deck();
-    cout << endl << deck.get_deck_size() << endl;
+    Jogo jogo = Jogo(qtd_jogadores);
 
-    Jogador jogador = Jogador();
-    jogador.draw_card(deck.deck, 8);
+    jogo.configura_jogo();
 
-    cout << endl;
-    jogador.print_cartas();
+    while (jogo.get_jogo()) {
+        jogo.acao_jogador(jogo.jogadores[0]);
+    }
 
-    cout << deck.get_deck_size() << endl;
-
-    Jogador::play_card(jogador.cartas, jogo.pilha_cartas, 1);
-
-    jogador.print_cartas();
-    jogo.print_pilha();
     return 0;
 }
 
