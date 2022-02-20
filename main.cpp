@@ -1,11 +1,13 @@
 #include <iostream>
 
 #include "Deck.h"
+#include "Jogo.h"
 #include "Jogador.h"
 
 using namespace std;
 
 int main() {
+    Jogo jogo = Jogo();
 
     Deck deck = Deck();
     deck.fill_deck();
@@ -21,6 +23,11 @@ int main() {
     jogador.print_cartas();
 
     cout << deck.get_deck_size() << endl;
+
+    Jogador::play_card(jogador.cartas, jogo.pilha_cartas, 1);
+
+    jogador.print_cartas();
+    jogo.print_pilha();
     return 0;
 }
 

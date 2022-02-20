@@ -11,7 +11,8 @@ private:
     int jogadores;
 
 public:
-    std::vector<Carta> pilha_cartas {};
+    std::vector<Carta> pilha_cartas {Carta("AMARELO", 9)};
+    void print_pilha();
 };
 
 #endif

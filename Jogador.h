@@ -8,11 +8,12 @@
 class Jogador {
 private:
     bool _jogando = true;
-    std::vector<Carta> _cartas {};
 
 public:
+    std::vector<Carta> cartas {};
     explicit Jogador();
     void draw_card(std::vector<Carta> &deck, int quantidade);
+    static void play_card(std::vector<Carta> &cartas_jogador, std::vector<Carta> &pilha_cartas, int index);
     void print_cartas();
 };
 
