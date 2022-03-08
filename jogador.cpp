@@ -27,18 +27,25 @@ void Jogador::play_card(std::vector<Carta> &cartas_jogador, std::vector<Carta> &
     bool carta_valida = false;
     index--;
 
+    std::cout << cartas_jogador.size();
     while (!carta_valida) {
-        if (cartas_jogador[index].get_cor() == pilha_cartas.back().get_cor() or
-            cartas_jogador[index].get_numero() == pilha_cartas.back().get_numero()) {
+        if (cartas_jogador.size() > index) {
+            if (cartas_jogador[index].get_cor() == pilha_cartas.back().get_cor() or
+                cartas_jogador[index].get_numero() == pilha_cartas.back().get_numero()) {
 
-            pilha_cartas.push_back(cartas_jogador[index]);
-            cartas_jogador.erase(cartas_jogador.begin() + index);
+                pilha_cartas.push_back(cartas_jogador[index]);
+                cartas_jogador.erase(cartas_jogador.begin() + index);
 
-            carta_valida = true;
+                carta_valida = true;
+            } else {
+                std::cout << cartas_jogador[index].get_numero() << ' ' << cartas_jogador[index].get_cor() << " não é uma carta válida para jogar." << std::endl << std::endl;
+
+                std::cout << "Selecione outra carta ou compre uma carta do deck." << std::endl;
+                std::cin >> index;
+                index--;
+            }
         } else {
-            std::cout << cartas_jogador[index].get_numero() << ' ' << cartas_jogador[index].get_cor() << " não é uma carta válida para jogar." << std::endl << std::endl;
-
-            std::cout << "Selecione outra carta ou compre uma carta do deck." << std::endl;
+            std::cout << "Carta escolhida não existe, tente outro índice" << std::endl;
             std::cin >> index;
             index--;
         }

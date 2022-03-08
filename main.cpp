@@ -5,16 +5,18 @@
 using namespace std;
 
 int main() {
-    int qtd_jogadores = 1;
+    int qtd_jogadores;
 
     cout << "Quanto jogadores vão participar da partida? (2-4)" << endl;
-
+    cin >> qtd_jogadores;
     Jogo jogo = Jogo(qtd_jogadores);
 
     jogo.configura_jogo();
 
     while (jogo.get_jogo()) {
-        jogo.acao_jogador(jogo.jogadores[0]);
+        for (int i = 0; i < qtd_jogadores; i++) {
+            jogo.acao_jogador(jogo.jogadores[i]);
+        }
     }
 
     return 0;

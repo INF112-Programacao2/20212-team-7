@@ -22,10 +22,11 @@ void Jogo::configura_jogo() {
     _deck.fill_deck();
     _deck.shuffle_deck();
 
-    Jogador jogador = Jogador();
-    jogadores.emplace_back(jogador);
-
-    jogadores[0].draw_card(_deck.deck, 8);
+    for (int i = 0; i < _qtd_jogadores; i++) {
+        Jogador jogador = Jogador();
+        jogadores.emplace_back(jogador);
+        jogadores[i].draw_card(_deck.deck, 8);
+    }
 
     _jogo = true;
 }
