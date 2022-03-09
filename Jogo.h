@@ -3,7 +3,7 @@
 
 #include <vector>
 
-#include "Carta.h"
+#include "Especial.h"
 #include "Jogador.h"
 #include "Deck.h"
 
@@ -15,7 +15,7 @@ private:
 
 public:
     explicit Jogo(int qtd_jogadores);
-    std::vector<Carta> pilha_cartas {Carta("AMARELO", 9)};
+    std::vector<Especial> pilha_cartas {Especial("AMARELO", 9, "")};
     std::vector<Jogador> jogadores;
 
     void print_pilha();

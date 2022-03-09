@@ -3,17 +3,17 @@
 
 #include <vector>
 
-#include "Carta.h"
+#include "Especial.h"
 
 class Jogador {
 private:
     bool _jogando = true;
 
 public:
-    std::vector<Carta> cartas {};
+    std::vector<Especial> cartas {};
     explicit Jogador();
-    void draw_card(std::vector<Carta> &deck, int quantidade);
-    static void play_card(std::vector<Carta> &cartas_jogador, std::vector<Carta> &pilha_cartas, int index);
+    void draw_card(std::vector<Especial> &deck, int quantidade);
+    static void play_card(std::vector<Especial> &cartas_jogador, std::vector<Especial> &pilha_cartas, int index);
     void print_cartas();
 };
 

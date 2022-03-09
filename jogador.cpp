@@ -3,9 +3,9 @@
 #include <iostream>
 
 #include "Jogador.h"
-#include "Carta.h"
+#include "Especial.h"
 
-void Jogador::draw_card(std::vector<Carta> &deck, int quantidade) {
+void Jogador::draw_card(std::vector<Especial> &deck, int quantidade) {
     for (int i = 0; i < quantidade; i++) {
         cartas.push_back(deck.back());
         deck.pop_back();
@@ -15,7 +15,7 @@ void Jogador::draw_card(std::vector<Carta> &deck, int quantidade) {
 void Jogador::print_cartas() {
     std::cout << "Suas cartas:" << std::endl;
 
-    std::for_each(cartas.begin(), cartas.end(), [](const Carta& n) { std::cout << n.get_numero() << ' ' << n.get_cor() << " | ";});
+    std::for_each(cartas.begin(), cartas.end(), [](const Especial& n) { std::cout << n.get_numero() << ' ' << n.get_cor() << " | ";});
     std::cout << std::endl << std::endl;
 }
 
@@ -23,7 +23,7 @@ void Jogador::print_cartas() {
  * Verifica se a carta escolhida pelo jogador com índice começando pelo 1 é da mesma cor ou mesmo número.
  * Caso seja, retira a carta do vetor com as cartas do jogador e joga na pilha de cartas.
  */
-void Jogador::play_card(std::vector<Carta> &cartas_jogador, std::vector<Carta> &pilha_cartas, int index) {
+void Jogador::play_card(std::vector<Especial> &cartas_jogador, std::vector<Especial> &pilha_cartas, int index) {
     bool carta_valida = false;
     index--;
 

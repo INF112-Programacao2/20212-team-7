@@ -3,7 +3,7 @@
 
 #include <vector>
 
-#include "Carta.h"
+#include "Especial.h"
 
 class Deck {
 public:
@@ -12,7 +12,7 @@ public:
     void print_deck();
     unsigned long get_deck_size() const;
 
-    std::vector<Carta> deck;
+    std::vector<Especial> deck;
 };
 
 #endif
