@@ -13,7 +13,7 @@ void Jogador::draw_card(std::vector<Especial> &deck, int quantidade) {
 }
 
 void Jogador::print_cartas() {
-    std::cout << "Suas cartas:" << std::endl;
+    std::cout << "Suas cartas: (" << cartas.size() <<  " cartas)" << std::endl;
 
     std::for_each(cartas.begin(), cartas.end(), [](const Especial& n) { std::cout << n.get_numero() << ' ' << n.get_cor() << " | ";});
     std::cout << std::endl << std::endl;
@@ -27,7 +27,6 @@ void Jogador::play_card(std::vector<Especial> &cartas_jogador, std::vector<Espec
     bool carta_valida = false;
     index--;
 
-    std::cout << cartas_jogador.size();
     while (!carta_valida) {
         if (cartas_jogador.size() > index) {
             if (cartas_jogador[index].get_cor() == pilha_cartas.back().get_cor() or
@@ -40,12 +39,12 @@ void Jogador::play_card(std::vector<Especial> &cartas_jogador, std::vector<Espec
             } else {
                 std::cout << cartas_jogador[index].get_numero() << ' ' << cartas_jogador[index].get_cor() << " não é uma carta válida para jogar." << std::endl << std::endl;
 
-                std::cout << "Selecione outra carta ou compre uma carta do deck." << std::endl;
+                std::cout << "Selecione outra carta." << std::endl;
                 std::cin >> index;
                 index--;
             }
         } else {
-            std::cout << "Carta escolhida não existe, tente outro índice" << std::endl;
+            std::cout << "Carta escolhida não existe, tente outro índice." << std::endl;
             std::cin >> index;
             index--;
         }

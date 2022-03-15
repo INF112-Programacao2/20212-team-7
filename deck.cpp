@@ -31,8 +31,6 @@ void Deck::fill_deck() {
         deck.emplace_back(Especial("CURINGA", 14, "ESCOLHE COR"));
         deck.emplace_back(Especial("CURINGA", 15, "ESCOLHE COR E +4"));
     }
-
-    std::cout << get_deck_size();
 }
 
 void Deck::print_deck() {

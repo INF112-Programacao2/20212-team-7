@@ -22,6 +22,7 @@ public:
     void configura_jogo();
     void acao_jogador(Jogador &jogador);
     bool get_jogo() const;
+    bool checa_cartas_validas(Jogador &jogador);
 };
 
 #endif
