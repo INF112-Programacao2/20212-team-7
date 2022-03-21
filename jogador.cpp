@@ -1,3 +1,4 @@
+#include <utility>
 #include <vector>
 #include <algorithm>
 #include <iostream>
@@ -15,7 +16,7 @@ void Jogador::draw_card(std::vector<Especial> &deck, int quantidade) {
 void Jogador::print_cartas() {
     std::cout << "Suas cartas: (" << cartas.size() <<  " cartas)" << std::endl;
 
-    std::for_each(cartas.begin(), cartas.end(), [](const Especial& n) { std::cout << n.get_numero() << ' ' << n.get_cor() << " | ";});
+    std::for_each(cartas.begin(), cartas.end(), [](Especial n) { std::cout << n.get_numero() << ' ' << n.get_acao_especial() << ' ' << n.get_cor() << " | ";});
     std::cout << std::endl << std::endl;
 }
 
@@ -51,5 +52,36 @@ void Jogador::play_card(std::vector<Especial> &cartas_jogador, std::vector<Espec
     }
 }
 
-Jogador::Jogador() = default;
+void Jogador::acao_especial(const std::string& nome_acao, Jogador& jogador, std::vector<Especial>& deck) {
+    std::string passar;
+
+    if (nome_acao == "BLOQUEIO") {
+        std::cout << jogador.get_nome() << " foi bloqueado! Digite qualquer coisa para passar o turno." << std::endl;
+        std::cin >> passar;
+    }
+
+    if (nome_acao == "+2") {
+        std::cout << jogador.get_nome() << ", digite qualquer coisa para comprar 2 cartas e passar o turno." << std::endl;
+        std::cin >> passar;
+
+        jogador.draw_card(deck, 2);
+    }
+}
+
+Jogador::Jogador(int turno, std::string nome) {
+    _turno = turno;
+    _nome = std::move(nome);
+}
+
+int Jogador::get_turno() const {
+    return this->_turno;
+}
+
+void Jogador::set_turno(int turno) {
+    _turno = turno;
+}
+
+std::string Jogador::get_nome() {
+    return this->_nome;
+}
 

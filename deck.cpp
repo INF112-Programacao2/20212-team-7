@@ -12,6 +12,7 @@ void Deck::fill_deck() {
     std::vector<std::string> acoes {"BLOQUEIO", "REVERTE", "+2"};
 
     for (int j = 0; j < 2; j++) {
+        int i_especiais = 10;
         for (int i = 0; i <= 9; i++) {
             deck.emplace_back(Especial("AMARELO", i, ""));
             deck.emplace_back(Especial("VERMELHO", i, ""));
@@ -19,11 +20,12 @@ void Deck::fill_deck() {
             deck.emplace_back(Especial("AZUL", i, ""));
         }
 
-        for_each(acoes.begin(), acoes.end(), [this](std::string &s) {
-            deck.emplace_back(Especial("AMARELO", 10, s));
-            deck.emplace_back(Especial("VERMELHO", 11, s));
-            deck.emplace_back(Especial("VERDE", 12, s));
-            deck.emplace_back(Especial("AZUL", 13, s));
+        for_each(acoes.begin(), acoes.end(), [this, &i_especiais](std::string &s) {
+            deck.emplace_back(Especial("AMARELO", i_especiais, s));
+            deck.emplace_back(Especial("VERMELHO", i_especiais, s));
+            deck.emplace_back(Especial("VERDE", i_especiais, s));
+            deck.emplace_back(Especial("AZUL", i_especiais, s));
+            i_especiais++;
         });
     }
 

@@ -25,7 +25,10 @@ void Jogo::configura_jogo() {
     _deck.shuffle_deck();
 
     for (int i = 0; i < _qtd_jogadores; i++) {
-        Jogador jogador = Jogador();
+        std::string nome = "Jogador ";
+        nome += std::to_string(i+1);
+
+        Jogador jogador = Jogador(i, nome);
         jogadores.emplace_back(jogador);
         jogadores[i].draw_card(_deck.deck, 8);
     }
@@ -42,17 +45,22 @@ void Jogo::acao_jogador(Jogador &jogador) {
     print_pilha();
     jogador.print_cartas();
 
-    bool cartas_validas = checa_cartas_validas(jogador);
 
-    if (cartas_validas) {
-        std::cout << "É o seu turno, qual carta deseja jogar? (Informe o índice da carta)" << std::endl;
+
+    bool carta_valida = checa_cartas_validas(jogador);
+
+    if (!pilha_cartas.back().get_acao_especial().empty() and !pilha_cartas.back().get_acao_realizada()) {
+        Jogador::acao_especial(pilha_cartas.back().get_acao_especial(), jogador, _deck.deck);
+        pilha_cartas.back().set_acao_realizada(true);
+    } else if (carta_valida) {
+        std::cout << jogador.get_nome() << ", é o seu turno, qual carta deseja jogar? (Informe o índice da carta)" << std::endl;
         std::cin >> index;
 
         if (index > 0) {
             Jogador::play_card(jogador.cartas, pilha_cartas, index);
         }
     } else {
-        std::cout << "Não há cartas válidas para você jogar, digite qualquer coisa para comprar uma carta e passar o turno." << std::endl;
+        std::cout << jogador.get_nome() << ", é o seu turno, mas não há cartas válidas para você jogar, digite qualquer coisa para comprar uma carta e passar o turno." << std::endl;
         std::cin >> passar;
         jogador.draw_card(_deck.deck, 1);
     }
@@ -62,6 +70,10 @@ bool Jogo::get_jogo() const {
     return this->_jogo;
 }
 
+/*
+ * Utiliza o algoritmo for_each para iterar sobre todas as cartas na mão do jogador e verificar se existe ao menos
+ * uma carta válida para ser jogada.
+ */
 bool Jogo::checa_cartas_validas(Jogador &jogador) {
     std::vector<Especial> cartas_jogador = jogador.cartas;
     bool carta_valida = false;
