@@ -12,6 +12,7 @@ public:
     Carta(std::string color, int number);
     std::string get_cor() const;
     int get_numero() const;
+    void set_cor(std::string cor);
 };
 
 #endif

@@ -16,3 +16,7 @@ int Carta::get_numero() const {
     return this->_number;
 }
 
+void Carta::set_cor(std::string cor) {
+    _color = std::move(cor);
+}
+

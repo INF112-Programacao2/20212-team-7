@@ -17,4 +17,4 @@ public:
     void set_acao_realizada(bool acao_realizada);
 };
 
-#endif //INC_20212_TEAM_7_ESPECIAL_H
+#endif

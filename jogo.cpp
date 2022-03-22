@@ -14,7 +14,23 @@ Jogo::Jogo(int qtd_jogadores) {
 void Jogo::print_pilha() {
     std::cout << "Última carta jogada:" << std::endl;
 
-    std::cout << pilha_cartas.back().get_numero() << ' ' << pilha_cartas.back().get_cor() << std::endl << std::endl;
+
+    if (pilha_cartas.back().get_cor() == "AMARELO") {
+        std::cout << "\033[;33m" << pilha_cartas.back().get_numero() << ' ' << pilha_cartas.back().get_acao_especial() << ' ' << pilha_cartas.back().get_cor() << "\033[0m";
+    }
+
+    if (pilha_cartas.back().get_cor() == "VERMELHO") {
+        std::cout << "\033[;31m" << pilha_cartas.back().get_numero() << ' ' << pilha_cartas.back().get_acao_especial() << ' ' << pilha_cartas.back().get_cor() << "\033[0m";
+    }
+
+    if (pilha_cartas.back().get_cor() == "VERDE") {
+        std::cout << "\033[;32m" << pilha_cartas.back().get_numero() << ' ' << pilha_cartas.back().get_acao_especial() << ' ' << pilha_cartas.back().get_cor() << "\033[0m";
+    }
+
+    if (pilha_cartas.back().get_cor() == "AZUL") {
+        std::cout << "\033[;34m" << pilha_cartas.back().get_numero() << ' ' << pilha_cartas.back().get_acao_especial() << ' ' << pilha_cartas.back().get_cor() << "\033[0m";
+    }
+    std::cout << std::endl << std::endl;
 }
 
 /*
@@ -49,8 +65,11 @@ void Jogo::acao_jogador(Jogador &jogador) {
 
     bool carta_valida = checa_cartas_validas(jogador);
 
+    /*
+     * Verifica se a última carta jogada possui alguma ação especial e se ela só foi realizada, para evitar ações infinitas.
+     */
     if (!pilha_cartas.back().get_acao_especial().empty() and !pilha_cartas.back().get_acao_realizada()) {
-        Jogador::acao_especial(pilha_cartas.back().get_acao_especial(), jogador, _deck.deck);
+        Jogador::acao_especial(pilha_cartas.back().get_acao_especial(), jogador, _deck.deck, pilha_cartas.back());
         pilha_cartas.back().set_acao_realizada(true);
     } else if (carta_valida) {
         std::cout << jogador.get_nome() << ", é o seu turno, qual carta deseja jogar? (Informe o índice da carta)" << std::endl;
@@ -80,7 +99,8 @@ bool Jogo::checa_cartas_validas(Jogador &jogador) {
 
     for_each(cartas_jogador.begin(), cartas_jogador.end(), [this, &carta_valida](const Especial &n) {
         if (n.get_cor() == pilha_cartas.back().get_cor() or
-            n.get_numero() == pilha_cartas.back().get_numero()) {
+            n.get_numero() == pilha_cartas.back().get_numero() or
+            n.get_cor() == "CURINGA") {
 
             carta_valida = true;
         }

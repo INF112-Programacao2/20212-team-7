@@ -5,7 +5,6 @@
 #include <vector>
 
 #include "Deck.h"
-#include "Carta.h"
 #include "Especial.h"
 
 void Deck::fill_deck() {
@@ -30,8 +29,8 @@ void Deck::fill_deck() {
     }
 
     for (int i = 0; i < 2; i++) {
-        deck.emplace_back(Especial("CURINGA", 14, "ESCOLHE COR"));
-        deck.emplace_back(Especial("CURINGA", 15, "ESCOLHE COR E +4"));
+        deck.emplace_back(Especial("CURINGA", 14, ""));
+        deck.emplace_back(Especial("CURINGA", 15, "+4"));
     }
 }
 
