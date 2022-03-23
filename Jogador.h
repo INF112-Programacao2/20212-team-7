@@ -19,7 +19,7 @@ public:
     void set_turno(int turno);
     std::string get_nome();
     void draw_card(std::vector<Especial> &deck, int quantidade);
-    static void play_card(std::vector<Especial> &cartas_jogador, std::vector<Especial> &pilha_cartas, int index);
+    virtual void play_card(std::vector<Especial> &cartas_jogador, std::vector<Especial> &pilha_cartas, int index);
     static void acao_especial(const std::string& nome_acao, Jogador& jogador, std::vector<Especial> &deck, Especial& carta);
     static void curinga(Especial& carta);
     void print_cartas();

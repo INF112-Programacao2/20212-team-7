@@ -6,6 +6,7 @@
 
 #include "Deck.h"
 #include "Especial.h"
+#include "Jogo.h"
 
 void Deck::fill_deck() {
     std::vector<std::string> acoes {"BLOQUEIO", "REVERTE", "+2"};
@@ -50,6 +51,12 @@ unsigned long Deck::get_deck_size() const {
 }
 
 void Deck::primeira_carta(std::vector<Especial> &pilha) {
+    std::vector<std::string> cores = {"AMARELO", "VERMELHO", "VERDE", "AZUL"};
+
     pilha.push_back(deck.back());
     deck.pop_back();
+
+    if (pilha.back().get_cor() == "CURINGA") {
+        pilha.back().set_cor(cores[Jogo::inteiro_aleatorio(0, 3)]);
+    }
 }

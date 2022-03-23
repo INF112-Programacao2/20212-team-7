@@ -18,25 +18,12 @@ void Jogador::print_cartas() {
     std::cout << "Suas cartas: (" << cartas.size() <<  " cartas)" << std::endl;
 
     std::for_each(cartas.begin(), cartas.end(), [](Especial n) {
-
-        if (n.get_cor() == "AMARELO") {
-            std::cout << "\033[;33m" << n.get_numero() << ' ' << n.get_acao_especial() << ' ' << n.get_cor() << "\033[0m" << " | ";
-        }
-
-        if (n.get_cor() == "VERMELHO") {
-            std::cout << "\033[;31m" << n.get_numero() << ' ' << n.get_acao_especial() << ' ' << n.get_cor() << "\033[0m" << " | ";
-        }
-
-        if (n.get_cor() == "VERDE") {
-            std::cout << "\033[;32m" << n.get_numero() << ' ' << n.get_acao_especial() << ' ' << n.get_cor() << "\033[0m" << " | ";
-        }
-
-        if (n.get_cor() == "AZUL") {
-            std::cout << "\033[;34m" << n.get_numero() << ' ' << n.get_acao_especial() << ' ' << n.get_cor() << "\033[0m" << " | ";
-        }
-
-        if (n.get_cor() == "CURINGA") {
-            std::cout << "\033[;30m" << n.get_numero() << ' ' << n.get_acao_especial() << ' ' << n.get_cor() << "\033[0m" << " | ";
+        if (n.get_numero() >= 10) {
+            Jogo::out_colorido(n.get_acao_especial() + ' ' + n.get_cor(), n.get_cor());
+            std::cout << " | ";
+        } else {
+            Jogo::out_colorido(std::to_string(n.get_numero()) + ' ' + n.get_cor(), n.get_cor());
+            std::cout << " | ";
         }
 
     });
