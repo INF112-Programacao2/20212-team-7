@@ -85,15 +85,7 @@ void Jogo::acao_jogador(Jogador &jogador) {
 
         std::transform(uno.begin(), uno.end(), uno.begin(), ::toupper);
         if (uno == "UNO") {
-            /*
-             * Mesma verificação feita no main.cpp
-             */
-            while (std::cout << jogador.get_nome() << " lembrou de gritar UNO e está livre para jogar sua carta. (Informe o índice da carta)" << std::endl and
-            !(std::cin >> index)) {
-                std::cin.clear();
-                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-                std::cout << "Tente novamente com um valor válido." << std::endl;
-            }
+            Jogo::validacao_input(jogador.get_nome() + " lembrou de gritar UNO e está livre para jogar sua carta.", index);
 
             Jogador::play_card(jogador.cartas, pilha_cartas, index);
         } else {
@@ -105,12 +97,7 @@ void Jogo::acao_jogador(Jogador &jogador) {
     }
 
     else if (carta_valida) {
-        while (std::cout << jogador.get_nome() << ", é o seu turno, qual carta deseja jogar? (Informe o índice da carta)" << std::endl and
-               !(std::cin >> index)) {
-            std::cin.clear();
-            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-            std::cout << "Tente novamente com um valor válido." << std::endl;
-        }
+        Jogo::validacao_input(jogador.get_nome() + ", é o seu turno, qual carta deseja jogar? (Informe o índice da carta)", index);
 
         Jogador::play_card(jogador.cartas, pilha_cartas, index);
     } else {
@@ -147,4 +134,15 @@ bool Jogo::checa_cartas_validas(Jogador &jogador) {
     });
 
     return carta_valida;
+}
+
+/*
+ * Uso do while em quanto o "cin" não conseguir ler o input do usuário.
+ */
+void Jogo::validacao_input(const std::string& mensagem, int& input) {
+    while (std::cout << mensagem << std::endl and !(std::cin >> input)) {
+        std::cin.clear(); // limpa o input
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // ignore o erro para gerar um novo input
+        std::cout << "Tente novamente com um valor válido." << std::endl;
+    }
 }

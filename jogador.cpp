@@ -5,6 +5,7 @@
 
 #include "Jogador.h"
 #include "Especial.h"
+#include "Jogo.h"
 
 void Jogador::draw_card(std::vector<Especial> &deck, int quantidade) {
     for (int i = 0; i < quantidade; i++) {
@@ -69,13 +70,12 @@ void Jogador::play_card(std::vector<Especial> &cartas_jogador, std::vector<Espec
             } else {
                 std::cout << cartas_jogador[index].get_numero() << ' ' << cartas_jogador[index].get_cor() << " não é uma carta válida para jogar." << std::endl << std::endl;
 
-                std::cout << "Selecione outra carta." << std::endl;
-                std::cin >> index;
+
+                Jogo::validacao_input("Selecione outra carta.", index);
                 index--;
             }
         } else {
-            std::cout << "Carta escolhida não existe, tente outro índice." << std::endl;
-            std::cin >> index;
+            Jogo::validacao_input("", index);
             index--;
         }
     }

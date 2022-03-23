@@ -23,6 +23,7 @@ public:
     void acao_jogador(Jogador &jogador);
     bool get_jogo() const;
     bool checa_cartas_validas(Jogador &jogador);
+    static void validacao_input(const std::string& mensagem, int& input);
 };
 
 #endif
