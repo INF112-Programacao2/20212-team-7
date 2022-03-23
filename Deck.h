@@ -9,6 +9,7 @@ class Deck {
 public:
     void fill_deck();
     void shuffle_deck();
+    void primeira_carta(std::vector<Especial> &pilha);
     void print_deck();
     unsigned long get_deck_size() const;
 

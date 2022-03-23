@@ -1,14 +1,22 @@
 #include <iostream>
+#include <stdexcept>
+#include <limits>
 
 #include "Jogo.h"
-
-using namespace std;
 
 int main() {
     int qtd_jogadores;
 
-    cout << "Quanto jogadores vão participar da partida? (2-4)" << endl;
-    cin >> qtd_jogadores;
+    /*
+     * Uso do while em quanto o "cin" não conseguir ler o input do usuário e que seja entre 2 e 4.
+     */
+    while (std::cout << "Quantos jogadores vão participar da partida? (2-4)\n" and !(std::cin >> qtd_jogadores)
+           or qtd_jogadores < 2 or qtd_jogadores > 4) {
+        std::cin.clear(); // limpa o input
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // ignore o erro para gerar um novo input
+        std::cout << "Tente novamente com um valor válido." << std::endl;
+    }
+
     Jogo jogo = Jogo(qtd_jogadores);
 
     jogo.configura_jogo();

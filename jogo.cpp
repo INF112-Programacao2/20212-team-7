@@ -49,11 +49,13 @@ void Jogo::configura_jogo() {
         jogadores[i].draw_card(_deck.deck, 8);
     }
 
+    _deck.primeira_carta(pilha_cartas);
     _jogo = true;
 }
 
 void Jogo::acao_jogador(Jogador &jogador) {
     int index;
+    std::string uno;
     std::string passar;
 
     system("clear");
@@ -71,17 +73,55 @@ void Jogo::acao_jogador(Jogador &jogador) {
     if (!pilha_cartas.back().get_acao_especial().empty() and !pilha_cartas.back().get_acao_realizada()) {
         Jogador::acao_especial(pilha_cartas.back().get_acao_especial(), jogador, _deck.deck, pilha_cartas.back());
         pilha_cartas.back().set_acao_realizada(true);
-    } else if (carta_valida) {
-        std::cout << jogador.get_nome() << ", é o seu turno, qual carta deseja jogar? (Informe o índice da carta)" << std::endl;
-        std::cin >> index;
+    }
 
-        if (index > 0) {
+    /*
+     * Quando o jogador possui apenas uma carta e ela é válida, será conferido primeiro se o jogador digitará "uno",
+     * caso positivo, ele pode jogar sua última carta e ganhar.
+     */
+    else if (carta_valida and jogador.cartas.size() == 1) {
+        std::cout << jogador.get_nome() << ", é o seu turno, qual carta deseja jogar? (Informe o índice da carta)" << std::endl;
+        std::cin >> uno;
+
+        std::transform(uno.begin(), uno.end(), uno.begin(), ::toupper);
+        if (uno == "UNO") {
+            /*
+             * Mesma verificação feita no main.cpp
+             */
+            while (std::cout << jogador.get_nome() << " lembrou de gritar UNO e está livre para jogar sua carta. (Informe o índice da carta)" << std::endl and
+            !(std::cin >> index)) {
+                std::cin.clear();
+                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                std::cout << "Tente novamente com um valor válido." << std::endl;
+            }
+
             Jogador::play_card(jogador.cartas, pilha_cartas, index);
+        } else {
+            std::cout << jogador.get_nome() << " esqueceu de gritar UNO e portanto deve comprar 1 carta e digitar qualquer coisa para passar o turno." << std::endl;
+            std::cin >> passar;
+            jogador.draw_card(_deck.deck, 1);
         }
+
+    }
+
+    else if (carta_valida) {
+        while (std::cout << jogador.get_nome() << ", é o seu turno, qual carta deseja jogar? (Informe o índice da carta)" << std::endl and
+               !(std::cin >> index)) {
+            std::cin.clear();
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+            std::cout << "Tente novamente com um valor válido." << std::endl;
+        }
+
+        Jogador::play_card(jogador.cartas, pilha_cartas, index);
     } else {
         std::cout << jogador.get_nome() << ", é o seu turno, mas não há cartas válidas para você jogar, digite qualquer coisa para comprar uma carta e passar o turno." << std::endl;
         std::cin >> passar;
         jogador.draw_card(_deck.deck, 1);
+    }
+
+    if (jogador.cartas.empty()) {
+        std::cout << jogador.get_nome() << " venceu o jogo, parabéns!" << std::endl;
+        _jogo = false;
     }
 }
 

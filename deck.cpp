@@ -48,3 +48,8 @@ void Deck::shuffle_deck() {
 unsigned long Deck::get_deck_size() const {
     return deck.size();
 }
+
+void Deck::primeira_carta(std::vector<Especial> &pilha) {
+    pilha.push_back(deck.back());
+    deck.pop_back();
+}
