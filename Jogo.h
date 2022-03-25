@@ -11,6 +11,7 @@
 class Jogo {
 private:
     bool _jogo = false;
+    bool _reverso = false;
     int _qtd_total;
     int _qtd_jogadores;
     int _qtd_computadores;
@@ -32,6 +33,7 @@ public:
     static void validacao_input(const std::string& mensagem, int& input);
     static int inteiro_aleatorio(int min, int max);
     static void out_colorido(const std::string& carta, const std::string& cor);
+    bool get_reverso() const;
 };
 
 #endif

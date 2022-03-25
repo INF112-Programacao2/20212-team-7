@@ -47,7 +47,7 @@ void Jogo::configura_jogo() {
         std::string nome = "Computador ";
         nome += std::to_string(i+1);
 
-        Computador computador = Computador(i, nome);
+        Computador computador = Computador(i+_qtd_jogadores, nome);
         computadores.emplace_back(computador);
         computadores[i].draw_card(_deck.deck, 8);
     }
@@ -115,6 +115,11 @@ void Jogo::acao_jogador(Jogador &jogador) {
         std::cout << jogador.get_nome() << " venceu o jogo, parabéns!" << std::endl;
         _jogo = false;
     }
+
+    if (pilha_cartas.back().get_acao_especial() == "REVERTE") {
+        _reverso = !_reverso;
+        pilha_cartas.back().set_acao_realizada(true);
+    }
 }
 
 void Jogo::acao_computador(Computador &computador) {
@@ -158,6 +163,11 @@ void Jogo::acao_computador(Computador &computador) {
     if (computador.cartas.empty()) {
         std::cout << computador.get_nome() << " venceu o jogo, parabéns!" << std::endl;
         _jogo = false;
+    }
+
+    if (pilha_cartas.back().get_acao_especial() == "REVERTE") {
+        _reverso = !_reverso;
+        pilha_cartas.back().set_acao_realizada(true);
     }
 }
 
@@ -241,4 +251,8 @@ void Jogo::out_colorido(const std::string& carta, const std::string& cor) {
     if (cor == "CURINGA") {
         std::cout << "\033[;30m" << carta << "\033[0m";
     }
+}
+
+bool Jogo::get_reverso() const {
+    return _reverso;
 }
