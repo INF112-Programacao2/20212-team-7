@@ -15,17 +15,22 @@ void Jogador::draw_card(std::vector<Especial> &deck, int quantidade) {
 }
 
 void Jogador::print_cartas() {
-    std::cout << "Suas cartas: (" << cartas.size() <<  " cartas)" << std::endl;
+    int index = 1;
 
-    std::for_each(cartas.begin(), cartas.end(), [](Especial n) {
+    std::cout << "Suas cartas:" << std::endl;
+
+    std::for_each(cartas.begin(), cartas.end(), [&index](Especial n) {
         if (n.get_numero() >= 10) {
-            Jogo::out_colorido(n.get_acao_especial() + ' ' + n.get_cor(), n.get_cor());
+            std::cout << index << ". ";
+            Jogo::out_colorido( n.get_acao_especial() + ' ' + n.get_cor(), n.get_cor());
             std::cout << " | ";
         } else {
-            Jogo::out_colorido(std::to_string(n.get_numero()) + ' ' + n.get_cor(), n.get_cor());
+            std::cout << index << ". ";
+            Jogo::out_colorido( std::to_string(n.get_numero()) + ' ' + n.get_cor(), n.get_cor());
             std::cout << " | ";
         }
 
+        index++;
     });
     std::cout << std::endl << std::endl;
 }
@@ -55,8 +60,13 @@ void Jogador::play_card(std::vector<Especial> &cartas_jogador, std::vector<Espec
 
                 carta_valida = true;
             } else {
-                std::cout << cartas_jogador[index].get_numero() << ' ' << cartas_jogador[index].get_cor() << " não é uma carta válida para jogar." << std::endl << std::endl;
-
+                if (cartas_jogador[index].get_numero() >= 10) {
+                    Jogo::out_colorido(cartas_jogador[index].get_acao_especial() + ' ' + cartas_jogador[index].get_cor(), cartas_jogador[index].get_cor());
+                    std::cout << " não é uma carta válida para jogar" << std::endl;
+                } else {
+                    Jogo::out_colorido(std::to_string(cartas_jogador[index].get_numero()) + ' ' + cartas_jogador[index].get_cor(), cartas_jogador[index].get_cor());
+                    std::cout << " não é uma carta válida para jogar" << std::endl;
+                }
 
                 Jogo::validacao_input("Selecione outra carta.", index);
                 index--;
@@ -132,10 +142,6 @@ Jogador::Jogador(int turno, std::string nome) {
 
 int Jogador::get_turno() const {
     return this->_turno;
-}
-
-void Jogador::set_turno(int turno) {
-    _turno = turno;
 }
 
 std::string Jogador::get_nome() {

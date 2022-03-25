@@ -16,7 +16,6 @@ public:
     std::vector<Especial> cartas {};
     Jogador(int turno, std::string nome);
     int get_turno() const;
-    void set_turno(int turno);
     std::string get_nome();
     void draw_card(std::vector<Especial> &deck, int quantidade);
     virtual void play_card(std::vector<Especial> &cartas_jogador, std::vector<Especial> &pilha_cartas, int index);

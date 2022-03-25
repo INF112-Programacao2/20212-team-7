@@ -9,8 +9,7 @@
 #include "Computador.h"
 #include "Especial.h"
 
-Jogo::Jogo(int qtd_total, int qtd_jogadores, int qtd_computadores) {
-    _qtd_total = qtd_total;
+Jogo::Jogo(int qtd_jogadores, int qtd_computadores) {
     _qtd_jogadores = qtd_jogadores;
     _qtd_computadores = qtd_computadores;
 }
@@ -65,7 +64,7 @@ void Jogo::acao_jogador(Jogador &jogador) {
         _deck.fill_deck();
     }
 
-    system("clear");
+    system("clear -x");
 
     print_pilha();
     jogador.print_cartas();
@@ -130,7 +129,7 @@ void Jogo::acao_computador(Computador &computador) {
         _deck.fill_deck();
     }
 
-    system("clear");
+    system("clear -x");
 
     print_pilha();
     computador.print_cartas();

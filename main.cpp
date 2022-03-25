@@ -21,7 +21,7 @@ int main() {
 
     qtd_computadores = qtd_total - qtd_jogadores;
 
-    Jogo jogo = Jogo(qtd_total, qtd_jogadores, qtd_computadores);
+    Jogo jogo = Jogo(qtd_jogadores, qtd_computadores);
 
     jogo.configura_jogo();
 
@@ -59,8 +59,6 @@ int main() {
                 turno_atual = qtd_total-1;
             }
         }
-
-        std::cout << "turno atual: " << turno_atual << std::endl;
     }
 
     return 0;

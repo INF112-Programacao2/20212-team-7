@@ -50,6 +50,10 @@ unsigned long Deck::get_deck_size() const {
     return deck.size();
 }
 
+/*
+ * A primeira carta jogada é tirada aleatoriamente do deck e caso seja um curinga, escolhe aleatoriamente alguma cor
+ * para ser jogada.
+ */
 void Deck::primeira_carta(std::vector<Especial> &pilha) {
     std::vector<std::string> cores = {"AMARELO", "VERMELHO", "VERDE", "AZUL"};
 
