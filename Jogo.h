@@ -18,7 +18,7 @@ private:
 
 public:
     explicit Jogo(int qtd_jogadores, int qtd_computadores);
-    std::vector<Especial> pilha_cartas {Especial("AMARELO", 9, "")};
+    std::vector<Especial> pilha_cartas {};
     std::vector<Jogador> jogadores;
     std::vector<Computador> computadores;
 
